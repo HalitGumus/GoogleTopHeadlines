@@ -24,7 +24,9 @@ class DashboardViewController: UIViewController, DashboardDisplayLogic
 
     var viewCollection: UICollectionView!
     
-    var handlerLilNews = LilNewsHandler()
+    var handlerLilNews: LilNewsHandler = LilNewsHandler()
+    
+    var searchText: String = ""
     
   // MARK: Object lifecycle
   
@@ -83,8 +85,7 @@ class DashboardViewController: UIViewController, DashboardDisplayLogic
   
   func load()
   {
-    let request = Dashboard.Something.Request()
-    interactor?.doSomething(request: request)
+    interactor?.fetchData(searchKey: "")
   }
   
   func load(articles: [Article]) {
@@ -111,10 +112,24 @@ class DashboardViewController: UIViewController, DashboardDisplayLogic
 private extension DashboardViewController {
 
     func configure() {
-//        view.backgroundColor = .systemGray6
-//        configureNavigation()
-//        configureViewTable()
+        view.backgroundColor = .systemGray6
+        load(title: "General")
+        configureNavigation()
         configureViewCollection()
+    }
+    
+    func configureNavigation() {
+        let categoryImage = UIImage(systemName: "list.dash")
+        let categoryBarButton = UIBarButtonItem(image: categoryImage, style: .plain, target: nil, action: nil)
+        categoryBarButton.tintColor = .systemGray
+        navigationItem.leftBarButtonItem = categoryBarButton
+
+        
+        let searchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width/2, height: 20))
+        searchBar.placeholder = "Search News"
+        searchBar.delegate = self
+        let rightNavBarButton = UIBarButtonItem(customView:searchBar)
+        self.navigationItem.rightBarButtonItem = rightNavBarButton
     }
     
     func configureViewCollection() {
@@ -133,5 +148,18 @@ private extension DashboardViewController {
             viewCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             viewCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+    }
+}
+
+extension DashboardViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.searchNews(_:)), object: searchBar)
+        perform(#selector(self.searchNews(_:)), with: searchBar, afterDelay: 0.75)
+    }
+    
+    @objc
+    func searchNews(_ searchBar: UISearchBar){
+        searchText = searchBar.text ?? ""
+        self.interactor?.fetchData(searchKey: searchText)
     }
 }

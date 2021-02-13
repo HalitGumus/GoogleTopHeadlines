@@ -7,9 +7,8 @@ target 'GoogleTopHeadlines' do
 
   # Pods for GoogleTopHeadlines
 
-pod 'Alamofire', '~> 5.2'
 pod 'SwiftLint'
-pod 'SwiftyJSON'
+pod 'IQKeyboardManager'
 
   target 'GoogleTopHeadlinesTests' do
     inherit! :search_paths

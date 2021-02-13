@@ -23,7 +23,6 @@
 		12DF37C525D7E58D0071C694 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12DF37C325D7E58D0071C694 /* LaunchScreen.storyboard */; };
 		12DF37D025D7E58E0071C694 /* GoogleTopHeadlinesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DF37CF25D7E58D0071C694 /* GoogleTopHeadlinesTests.swift */; };
 		12DF37E125D7EA3B0071C694 /* DashboardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DF37DB25D7EA3B0071C694 /* DashboardPresenter.swift */; };
-		12DF37E225D7EA3B0071C694 /* DashboardWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DF37DC25D7EA3B0071C694 /* DashboardWorker.swift */; };
 		12DF37E325D7EA3B0071C694 /* DashboardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DF37DD25D7EA3B0071C694 /* DashboardRouter.swift */; };
 		12DF37E425D7EA3B0071C694 /* DashboardModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DF37DE25D7EA3B0071C694 /* DashboardModels.swift */; };
 		12DF37E525D7EA3B0071C694 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DF37DF25D7EA3B0071C694 /* DashboardViewController.swift */; };
@@ -64,7 +63,6 @@
 		12DF37CF25D7E58D0071C694 /* GoogleTopHeadlinesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleTopHeadlinesTests.swift; sourceTree = "<group>"; };
 		12DF37D125D7E58E0071C694 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12DF37DB25D7EA3B0071C694 /* DashboardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardPresenter.swift; sourceTree = "<group>"; };
-		12DF37DC25D7EA3B0071C694 /* DashboardWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardWorker.swift; sourceTree = "<group>"; };
 		12DF37DD25D7EA3B0071C694 /* DashboardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardRouter.swift; sourceTree = "<group>"; };
 		12DF37DE25D7EA3B0071C694 /* DashboardModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModels.swift; sourceTree = "<group>"; };
 		12DF37DF25D7EA3B0071C694 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 			children = (
 				1201498925D802FB000CB30D /* Collection */,
 				12DF37DB25D7EA3B0071C694 /* DashboardPresenter.swift */,
-				12DF37DC25D7EA3B0071C694 /* DashboardWorker.swift */,
 				12DF37DD25D7EA3B0071C694 /* DashboardRouter.swift */,
 				12DF37DE25D7EA3B0071C694 /* DashboardModels.swift */,
 				12DF37DF25D7EA3B0071C694 /* DashboardViewController.swift */,
@@ -375,7 +372,6 @@
 				12DF37E325D7EA3B0071C694 /* DashboardRouter.swift in Sources */,
 				12DF37B925D7E58B0071C694 /* AppDelegate.swift in Sources */,
 				12DF37E425D7EA3B0071C694 /* DashboardModels.swift in Sources */,
-				12DF37E225D7EA3B0071C694 /* DashboardWorker.swift in Sources */,
 				1201498625D8005F000CB30D /* Extension.swift in Sources */,
 				12DF37E625D7EA3B0071C694 /* DashboardInteractor.swift in Sources */,
 				1201499725D80C08000CB30D /* Settings.swift in Sources */,

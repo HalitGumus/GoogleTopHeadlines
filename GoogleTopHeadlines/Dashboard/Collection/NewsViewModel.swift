@@ -15,21 +15,21 @@ class NewsViewModel {
     var style: Style = Settings.shared.style
 
     var categoryName: String = ""
+    var searchKey: String = ""
     
     init(controller: DashboardViewController) {
         self.controller = controller
     }
 
-    func load() {
-        loadArticles()
+    func load(searchKey: String) {
+        loadArticles(searchKey: searchKey)
         controller.load()
     }
 
-    func loadArticles(category: String = Settings.shared.category.rawValue) {
-        let url = NewsApi.urlForCategory(category)
+    func loadArticles(category: String = Settings.shared.category.rawValue, searchKey: String) {
+        let url = NewsApi.urlForCategory(category: category, searchKey: searchKey)
         NewsApi.getArticles(url: url) { [weak self] (articles) in
-            guard let articles = articles,
-                  let style = self?.style else { return }
+            guard let articles = articles else { return }
             self?.controller.load(articles: articles)
             self?.controller.load()
         }
@@ -40,8 +40,8 @@ class NewsViewModel {
         controller.load(title: title)
     }
 
-    func select(_ category: String) {
-        loadArticles(category: category)
+    func select(category: String, searchKey: String) {
+        loadArticles(category: category, searchKey: searchKey)
 
         guard let newsCategory = NewsCategory(rawValue: category) else { return }
         Settings.shared.category = newsCategory
@@ -61,7 +61,7 @@ class NewsViewModel {
         let menuActions = NewsCategory.allCases.map({ (item) -> UIAction in
             let name = item.rawValue
             return UIAction(title: name.capitalized, image: UIImage(systemName: item.systemName)) { (_) in
-                self.select(name)
+                self.select(category: name, searchKey: self.searchKey)
             }
         })
 

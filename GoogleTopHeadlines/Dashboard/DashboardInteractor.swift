@@ -14,7 +14,7 @@ import UIKit
 
 protocol DashboardBusinessLogic
 {
-  func doSomething(request: Dashboard.Something.Request)
+  func fetchData(searchKey: String)
 }
 
 protocol DashboardDataStore
@@ -25,20 +25,19 @@ protocol DashboardDataStore
 class DashboardInteractor: DashboardBusinessLogic, DashboardDataStore
 {
   var presenter: DashboardPresentationLogic?
-  var worker: DashboardWorker?
   //var name: String = ""
   
   // MARK: Do something
   
-  func doSomething(request: Dashboard.Something.Request)
+    func fetchData(searchKey: String)
   {
-    var category: NewsCategory = .general
-    loadData(category.rawValue)
+    let category: NewsCategory = .general
+    loadData(category: category.rawValue, searchKey: searchKey)
   }
     
     
-    func loadData(_ category: String) {
-        guard let url = NewsApi.urlForCategory(category) else {
+    func loadData(category: String, searchKey: String) {
+        guard let url = NewsApi.urlForCategory(category: category, searchKey: searchKey) else {
             print("load data error")
             return
         }

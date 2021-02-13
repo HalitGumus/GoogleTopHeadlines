@@ -12,7 +12,7 @@ struct NewsApi {
 
     static let ApiKey = "2b0b2629baca442597328ff612075fe0"
 
-    static func urlForCategory(_ category: String) -> URL? {
+    static func urlForCategory(category: String, searchKey: String) -> URL? {
         var urlComponents = NewsApi.baseUrlComponents
 
         urlComponents.path = Path.top.rawValue
@@ -20,8 +20,9 @@ struct NewsApi {
         let keyQueryItem = NewsApi.keyQueryItem
         let countryQueryItem = URLQueryItem(name: "country", value: "us")
         let categoryQueryItem = URLQueryItem(name: "category", value: category)
+        let searchQueryItem = URLQueryItem(name: "q", value: searchKey)
 
-        urlComponents.queryItems = [ keyQueryItem, countryQueryItem, categoryQueryItem ]
+        urlComponents.queryItems = [ keyQueryItem, countryQueryItem, categoryQueryItem, searchQueryItem]
 
         return urlComponents.url
     }

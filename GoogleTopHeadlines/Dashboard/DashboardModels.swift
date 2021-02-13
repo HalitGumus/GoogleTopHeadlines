@@ -12,25 +12,6 @@
 
 import UIKit
 
-enum Dashboard
-{
-  // MARK: Use cases
-  
-  enum Something
-  {
-    struct Request
-    {
-    }
-    struct Response
-    {
-    }
-    struct ViewModel
-    {
-    }
-  }
-}
-
-
 class newsArticle: NSObject {
     
     var headline: String?
