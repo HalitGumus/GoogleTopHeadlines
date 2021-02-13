@@ -41,4 +41,4 @@ pod install
 
 ### Screenshots
 
-<img src=Images/Dashboard.png height=400> <img src=Images/Search.png height=400>
+<img src=Images/Dashboard.png height=400> <img src=Images/Search.png height=400> <img src=Images/Browser.png height=400>
