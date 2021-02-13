@@ -14,7 +14,7 @@ import UIKit
 
 protocol DashboardDisplayLogic: class
 {
-  func displaySomething(viewModel: Dashboard.Something.ViewModel)
+  func load(articles: [Article])
 }
 
 class DashboardViewController: UIViewController, DashboardDisplayLogic
@@ -22,6 +22,10 @@ class DashboardViewController: UIViewController, DashboardDisplayLogic
   var interactor: DashboardBusinessLogic?
   var router: (NSObjectProtocol & DashboardRoutingLogic & DashboardDataPassing)?
 
+    var viewCollection: UICollectionView!
+    
+    var handlerLilNews = LilNewsHandler()
+    
   // MARK: Object lifecycle
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
@@ -69,46 +73,65 @@ class DashboardViewController: UIViewController, DashboardDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
-    doSomething()
+    configure()
+    load()
   }
   
   // MARK: Do something
   
   //@IBOutlet weak var nameTextField: UITextField!
   
-  func doSomething()
+  func load()
   {
     let request = Dashboard.Something.Request()
     interactor?.doSomething(request: request)
   }
   
-  func displaySomething(viewModel: Dashboard.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
+  func load(articles: [Article]) {
+    updateVisibility()
+    handlerLilNews.items = articles
+    
+    viewCollection.dataSource = handlerLilNews
+    viewCollection.delegate = handlerLilNews
+    
+    viewCollection.reloadData()
   }
-}
-
-extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+    
+    func load(title thisTitle: String) {
+        title = thisTitle
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewsCell", for: indexPath) as? NewsCell {
-            return cell
-            
-        } else {
-            return UICollectionViewCell()
-        }
+    func updateVisibility() {
+        viewCollection.isHidden = false
+
+        viewCollection.isPagingEnabled = true
     }
 }
 
-extension DashboardViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let width = self.view.frame.width
-        let height: CGFloat = width / 2
-        
-        return CGSize(width: width, height: height)
+private extension DashboardViewController {
+
+    func configure() {
+//        view.backgroundColor = .systemGray6
+//        configureNavigation()
+//        configureViewTable()
+        configureViewCollection()
+    }
+    
+    func configureViewCollection() {
+        let identifiers = NewsViewModel.Style.allCases
+            .filter { !$0.isTable }
+            .flatMap { $0.identifiers }
+        viewCollection = UICollectionView(frame: .zero, direction: .horizontal, identifiers: identifiers)
+        viewCollection.register(LilNewsCell.self, forCellWithReuseIdentifier: "LilNewsCell")
+        viewCollection.isHidden = true
+        viewCollection.showsHorizontalScrollIndicator = false
+
+        view.addSubviewForAutoLayout(viewCollection)
+        NSLayoutConstraint.activate([
+            viewCollection.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            viewCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            viewCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            viewCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
 }

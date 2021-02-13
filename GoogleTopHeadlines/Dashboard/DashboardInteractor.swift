@@ -32,14 +32,8 @@ class DashboardInteractor: DashboardBusinessLogic, DashboardDataStore
   
   func doSomething(request: Dashboard.Something.Request)
   {
-    worker = DashboardWorker()
-    worker?.doSomeWork()
-    
     var category: NewsCategory = .general
     loadData(category.rawValue)
-    
-    let response = Dashboard.Something.Response()
-    presenter?.presentSomething(response: response)
   }
     
     
@@ -51,7 +45,8 @@ class DashboardInteractor: DashboardBusinessLogic, DashboardDataStore
 
         NewsApi.getArticles(url: url) { [weak self] (articles) in
             guard let articles = articles else { return }
-            print(articles)
+            
+            self?.presenter?.presentArticle(articles: articles)
         }
     }
 }
