@@ -39,6 +39,6 @@ pod install
 - Detail page
 - UnitTest
 
-#### Screenshots
+### Screenshots
 
 <img src=Images/Dashboard.png height=400> <img src=Images/Search.png height=400>
